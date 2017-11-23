@@ -1,0 +1,24 @@
+voiture_admin_transmission:
+    resource: "@VoitureBundle/Resources/config/routing/transmission.yml"
+    prefix:   /admin/transmission
+voiture_admin_energie:
+     resource: "@VoitureBundle/Resources/config/routing/energie.yml"
+     prefix:   /admin/energie
+voiture_admin_marque:
+       resource: "@VoitureBundle/Resources/config/routing/marque.yml"
+       prefix:   /admin/marque
+voiture_admin_modele:
+      resource: "@VoitureBundle/Resources/config/routing/modele.yml"
+      prefix:   /admin/modele
+voiture_admin_carburant:
+     resource: "@VoitureBundle/Resources/config/routing/carburant.yml"
+     prefix:   /admin/carburant
+voiture_admin_region:
+      resource: "@VoitureBundle/Resources/config/routing/region.yml"
+      prefix:   /admin/region
+voiture_voiture:
+       resource: "@VoitureBundle/Resources/config/routing/voiture.yml"
+       prefix:   /voiture
+voiture_homepage:
+    path:     /
+    defaults: { _controller: VoitureBundle:Voiture:index }

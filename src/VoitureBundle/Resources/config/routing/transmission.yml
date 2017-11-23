@@ -1,0 +1,24 @@
+admin_transmission_index:
+    path:     /
+    defaults: { _controller: "VoitureBundle:Transmission:index" }
+    methods:  GET
+
+admin_transmission_show:
+    path:     /{id}/show
+    defaults: { _controller: "VoitureBundle:Transmission:show" }
+    methods:  GET
+
+admin_transmission_new:
+    path:     /new
+    defaults: { _controller: "VoitureBundle:Transmission:new" }
+    methods:  [GET, POST]
+
+admin_transmission_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VoitureBundle:Transmission:edit" }
+    methods:  [GET, POST]
+
+admin_transmission_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VoitureBundle:Transmission:delete" }
+    methods:  DELETE

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+      <h3>transmission list</h3>
+    <hr>
+
+    
+    <table class="table table-striped  table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transmission in transmissions %}
+            <tr>
+                <td><a href="{{ path('admin_transmission_show', { 'id': transmission.id }) }}">{{ transmission.id }}</a></td>
+                <td>{{ transmission.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="btn btn-sm button-style" href="{{ path('admin_transmission_show', { 'id': transmission.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-sm button-style" href="{{ path('admin_transmission_edit', { 'id': transmission.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn ajouter" href="{{ path('admin_transmission_new') }}">Create a new transmission</a>
+        </li>
+    </ul>
+{% endblock %}

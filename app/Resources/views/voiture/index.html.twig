@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+          <div class="container">
+              <h1>Tout Les Annonces({{ nb }} )</h1>
+              <hr>
+
+    <table>
+      
+
+      
+        {% for voiture in voitures %}
+
+               <div class="post  col-xs-10 col-xs-offset-1">
+                        <div class="post-image ">
+                            <div class="post-overlay"><a href="{{ path('voiture_show', { 'id': voiture.id }) }}"></div>
+                            <div class="post-category">
+                                
+                                <p class="blog_date">{% if voiture.updateAt %}{{ voiture.updateAt|date('Y-m-d H:i:s') }}{% endif %}</p></a>
+                            </div><img alt="Image" class="img-responsive" src=
+                            "{{ asset('uploads/'~voiture.path) }}">
+                          </div>
+                            
+                            <div class="description">
+
+                                <li class=" marque "> {{ voiture.marque  }} {{ voiture.modele}}</li>  
+                                <ul class="desc">
+
+                                  <li  class="desc prix"> Dt{{ voiture.prix }}</li>
+                                  <li  class="desc age"> Année  {% if voiture.agevehicule %}{{ voiture.agevehicule|date("m/Y") }}{% endif %}</li>
+
+                                  <li  class="desc kilometrage">{{ voiture.kilometrage }} KM</li>   
+                                 
+
+                                
+                                  <li  class="desc region"> {{ voiture.region}}</li> 
+                                
+                                </div> 
+                            </ul>
+                            <hr>
+                            <li>
+                              <a class="btn bnt-edit "href="{{ path('voiture_show', { 'id': voiture.id }) }}">show</a>
+                            </li>
+                        </div>
+                    </div>
+
+        {% endfor %}
+
+        </div>
+  
+    {# display navigation #}
+  <div class="navigation">
+    {{ knp_pagination_render(voitures) }}
+  </div>
+   
+{% endblock %}
+   

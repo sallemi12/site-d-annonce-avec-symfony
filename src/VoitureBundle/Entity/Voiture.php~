@@ -1,0 +1,523 @@
+<?php
+
+namespace VoitureBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
+
+
+/**
+ * Voiture
+ *
+ * @ORM\Table(name="voiture")
+ * @ORM\Entity(repositoryClass="VoitureBundle\Repository\VoitureRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Voiture
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="prix", type="integer")
+     */
+    private $prix;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="agevehicule", type="date")
+     */
+    private $agevehicule;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="kilometrage", type="integer")
+     */
+    private $kilometrage;
+
+
+
+    /**
+     * 
+     *  @ORM\ManyToOne(targetEntity="Marque")
+     *  @ORM\JoinColumn(nullable=false)
+     */
+    private $marque ;
+
+    /**
+     * 
+     *  @ORM\ManyToOne(targetEntity="Modele")
+     *  @ORM\JoinColumn(nullable=false)
+     */
+    private $modele ;
+
+    /**
+     * 
+     *  @ORM\ManyToOne(targetEntity="Carburant")
+     *  @ORM\JoinColumn(nullable=false)
+     */
+    private $carburant;
+
+
+    /**
+     * 
+     *  @ORM\ManyToOne(targetEntity="Transmission")
+     *  @ORM\JoinColumn(nullable=false)
+     */
+    private $transmission;
+
+    /**
+     * 
+     *  @ORM\ManyToOne(targetEntity="Region")
+     *  @ORM\JoinColumn(nullable=false)
+     */
+    private $region;
+
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\COlumn(name="updated_at",type="datetime", nullable=true) 
+     */
+    private $updateAt;
+
+
+    /**
+     * @var \String
+     * 
+     * @ORM\COlumn(name="annonceur",type="string", length=50) 
+     */
+    private $ajouterpar;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=500)
+     */
+    private $description;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="telephone_annonceur", type="integer")
+     */
+    private $telephone;
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="email_annonceur", type="string", length=50)
+     */
+    private $email;
+
+    /**
+     * @ORM\PostLoad()
+     */
+    public function postLoad()
+    {
+        $this->updateAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $path;
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/'.$this->path;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads';
+    }
+    
+    
+
+
+ 
+
+ 
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param integer $prix
+     *
+     * @return Voiture
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return int
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+     /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    public function upload()
+    {
+    // the file property can be empty if the field is not required
+    if (null === $this->getFile()) {
+        return;
+    }
+
+    // use the original file name here but you should
+    // sanitize it at least to avoid any security issues
+
+    // move takes the target directory and then the
+    // target filename to move to
+    $this->getFile()->move(
+        $this->getUploadRootDir(),
+        $this->getFile()->getClientOriginalName()
+    );
+
+    // set the path property to the filename where you've saved the file
+    $this->path = $this->getFile()->getClientOriginalName();
+
+    // clean up the file property as you won't need it anymore
+    $this->file = null;
+    }
+
+
+    /**
+     * Set agevehicule
+     *
+     * @param \DateTime $agevehicule
+     *
+     * @return Voiture
+     */
+    public function setAgevehicule($agevehicule)
+    {
+        $this->agevehicule = $agevehicule;
+
+        return $this;
+    }
+
+    /**
+     * Get agevehicule
+     *
+     * @return \DateTime
+     */
+    public function getAgevehicule()
+    {
+        return $this->agevehicule;
+    }
+
+    /**
+     * Set kilometrage
+     *
+     * @param integer $kilometrage
+     *
+     * @return Voiture
+     */
+    public function setKilometrage($kilometrage)
+    {
+        $this->kilometrage = $kilometrage;
+
+        return $this;
+    }
+
+    /**
+     * Get kilometrage
+     *
+     * @return integer
+     */
+    public function getKilometrage()
+    {
+        return $this->kilometrage;
+    }
+
+    /**
+     * Set updateAt
+     *
+     * @param \DateTime $updateAt
+     *
+     * @return Voiture
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updateAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdateAt()
+    {
+        return $this->updateAt;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     *
+     * @return Voiture
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set marque
+     *
+     * @param \VoitureBundle\Entity\Marque $marque
+     *
+     * @return Voiture
+     */
+    public function setMarque(\VoitureBundle\Entity\Marque $marque)
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return \VoitureBundle\Entity\Marque
+     */
+    public function getMarque()
+    {
+        return $this->marque;
+    }
+
+    /**
+     * Set modele
+     *
+     * @param \VoitureBundle\Entity\Modele $modele
+     *
+     * @return Voiture
+     */
+    public function setModele(\VoitureBundle\Entity\Modele $modele)
+    {
+        $this->modele = $modele;
+
+        return $this;
+    }
+
+    /**
+     * Get modele
+     *
+     * @return \VoitureBundle\Entity\Modele
+     */
+    public function getModele()
+    {
+        return $this->modele;
+    }
+
+    /**
+     * Set carburant
+     *
+     * @param \VoitureBundle\Entity\Carburant $carburant
+     *
+     * @return Voiture
+     */
+    public function setCarburant(\VoitureBundle\Entity\Carburant $carburant)
+    {
+        $this->carburant = $carburant;
+
+        return $this;
+    }
+
+    /**
+     * Get carburant
+     *
+     * @return \VoitureBundle\Entity\Carburant
+     */
+    public function getCarburant()
+    {
+        return $this->carburant;
+    }
+
+    /**
+     * Set transmission
+     *
+     * @param \VoitureBundle\Entity\Transmission $transmission
+     *
+     * @return Voiture
+     */
+    public function setTransmission(\VoitureBundle\Entity\Transmission $transmission)
+    {
+        $this->transmission = $transmission;
+
+        return $this;
+    }
+
+    /**
+     * Get transmission
+     *
+     * @return \VoitureBundle\Entity\Transmission
+     */
+    public function getTransmission()
+    {
+        return $this->transmission;
+    }
+
+    /**
+     * Set region
+     *
+     * @param \VoitureBundle\Entity\Region $region
+     *
+     * @return Voiture
+     */
+    public function setRegion(\VoitureBundle\Entity\Region $region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return \VoitureBundle\Entity\Region
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+
+
+
+    /**
+     * Set ajouterpar
+     *
+     * @param string $ajouterpar
+     *
+     * @return Voiture
+     */
+    public function setAjouterpar($ajouterpar)
+    {
+        $this->ajouterpar = $ajouterpar;
+
+        return $this;
+    }
+
+    /**
+     * Get ajouterpar
+     *
+     * @return string
+     */
+    public function getAjouterpar()
+    {
+        return $this->ajouterpar;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Voiture
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+}

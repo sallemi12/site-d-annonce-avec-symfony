@@ -1,0 +1,24 @@
+admin_modele_index:
+    path:     /
+    defaults: { _controller: "VoitureBundle:Modele:index" }
+    methods:  GET
+
+admin_modele_show:
+    path:     /{id}/show
+    defaults: { _controller: "VoitureBundle:Modele:show" }
+    methods:  GET
+
+admin_modele_new:
+    path:     /new
+    defaults: { _controller: "VoitureBundle:Modele:new" }
+    methods:  [GET, POST]
+
+admin_modele_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VoitureBundle:Modele:edit" }
+    methods:  [GET, POST]
+
+admin_modele_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VoitureBundle:Modele:delete" }
+    methods:  DELETE

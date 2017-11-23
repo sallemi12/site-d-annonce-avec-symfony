@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Energies list</h1>
+
+      <table class="table table-striped  table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for energie in energies %}
+            <tr>
+                <td><a href="{{ path('admin_energie_show', { 'id': energie.id }) }}">{{ energie.id }}</a></td>
+                <td>{{ energie.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="btn btn-sm button-style" href="{{ path('admin_energie_show', { 'id': energie.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-sm button-style" href="{{ path('admin_energie_edit', { 'id': energie.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn ajouter" href="{{ path('admin_energie_new') }}">Create a new energie</a>
+        </li>
+    </ul>
+{% endblock %}

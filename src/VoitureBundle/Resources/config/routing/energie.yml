@@ -1,0 +1,24 @@
+admin_energie_index:
+    path:     /
+    defaults: { _controller: "VoitureBundle:Energie:index" }
+    methods:  GET
+
+admin_energie_show:
+    path:     /{id}/show
+    defaults: { _controller: "VoitureBundle:Energie:show" }
+    methods:  GET
+
+admin_energie_new:
+    path:     /new
+    defaults: { _controller: "VoitureBundle:Energie:new" }
+    methods:  [GET, POST]
+
+admin_energie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VoitureBundle:Energie:edit" }
+    methods:  [GET, POST]
+
+admin_energie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VoitureBundle:Energie:delete" }
+    methods:  DELETE

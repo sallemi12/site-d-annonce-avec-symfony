@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+          <div class="container">
+              <h3>Mes Annonces</h3>
+              <hr>
+
+    <table>
+        
+        {% for voiture in voitures %}
+                  <div class="post  col-xs-10 col-xs-offset-1">
+                        <div class="post-image ">
+                            <div class="post-overlay"><a href="{{ path('voiture_show', { 'id': voiture.id }) }}"></div>
+                            <div class="post-category">
+                                
+                                <p class="blog_date">{% if voiture.updateAt %}{{ voiture.updateAt|date('Y-m-d H:i:s') }}{% endif %}</p></a>
+                            </div><img alt="Image" class="img-responsive" src=
+                            "{{ asset('uploads/'~voiture.path) }}">
+                          </div>
+                                    <img src="" alt="">
+                            
+                            <div class="description">
+
+                                <li class=" marque "> {{ voiture.marque  }} {{ voiture.modele}}</li>  
+                                <ul class="desc">
+
+                                  <li  class="desc prix"> Dt{{ voiture.prix }}</li>
+                                  <li  class="desc age"> Année  {% if voiture.agevehicule %}{{ voiture.agevehicule|date("m/Y") }}{% endif %}</li>
+
+                                  <li  class="desc kilometrage">{{ voiture.kilometrage }} KM</li>   
+                                 
+
+                                
+                                  <li  class="desc region"> {{ voiture.region}}</li> 
+                                
+                                </div> 
+                            </ul>
+                            <hr>
+                          <li>
+                            <a class="btn btn-sm button-show-user" href="{{ path('voiture_show', { 'id': voiture.id }) }}">show</a>
+                          </li>
+                            <li>
+                            <a class="btn btn-sm button-edit-user " href="{{ path('voiture_edit', { 'id': voiture.id }) }}">edit</a>
+                            </li>
+                            
+                        </div>
+                    </div>
+             {% else %}
+                     <li>pas d annonce</li>       
+                    
+                    
+
+        {% endfor %}
+
+        </div>
+     {# display navigation #}
+ 
+   
+{% endblock %}
+   

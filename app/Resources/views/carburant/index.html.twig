@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Carburants list</h3>
+    <hr>
+
+    <table class="table table-striped  table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for carburant in carburants %}
+            <tr>
+                <td><a href="{{ path('admin_carburant_show', { 'id': carburant.id }) }}">{{ carburant.id }}</a></td>
+                <td>{{ carburant.nom }}</td>
+                <td>
+                    <ul class="ul-style">
+                        <li>
+                            <a class="btn btn-sm button-style"href="{{ path('admin_carburant_show', { 'id': carburant.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-sm button-style"href="{{ path('admin_carburant_edit', { 'id': carburant.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn ajouter" href="{{ path('admin_carburant_new') }}">Create a new carburant</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+                <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.css" />
+     
+
+    </head>
+    <body>
+   
+   
+ <div class="container">
+
+  <div class="row">
+                <nav class="navbar navbar-default">
+
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main_menu">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                      </button>
+                    </div>         
+                    <div class="collapse navbar-collapse" id="main_menu">
+                      <ul class="nav navbar-nav navbar-right menu">
+                        <li class="nav-item active"><a class="nav-link" href="{{ path('voiture_index') }}">Home</a></li>
+                          <li class="nav-item"><a class="nav-item nav-link" href="{{ path('voiture_new') }}">Ajouter une Annonce</a></li>
+                          <li class="nav-item"><a class="nav-item nav-link" href="{{ path('voiture_rechercheform') }}">Recherche </a></li>
+                           {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') %}
+                         
+                            <li class="nav-item"><a class="nav-item nav-link" href="{{ path('user_annonce') }}">Mes Annonces</a></li>
+                              <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Bonjour, {{ app.user }}</a>
+                                  <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+
+                                    <a class="dropdown-item" href="{{ path('fos_user_profile_edit') }}">Modifier profile</a>
+                                    <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                                   </div>
+                              </li>
+                         
+                           
+                            {% endif %}
+                          {% if is_granted('ROLE_ADMIN') %}  
+                            <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Binevenu dans l'administration , {{ app.user }}</a>
+                                  <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+
+                                    <a class="dropdown-item" href="{{ path('admin_region_index') }}">Region</a>
+                                     <a class="dropdown-item" href="{{ path('admin_transmission_index') }}">Transmission</a>
+                                      <a class="dropdown-item" href="{{ path('admin_carburant_index') }}">Carburant</a>
+                                       <a class="dropdown-item" href="{{ path('admin_marque_index') }}">Marque</a>
+                                        <a class="dropdown-item" href="{{ path('admin_modele_index') }}">Modele</a>
+                                         <a class="dropdown-item" href="{{ path('fos_user_profile_edit') }}">Modifier profile</a>
+                                    <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                                   </div>
+                              </li>
+                          {% endif %}
+                           {% if not is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') %}
+                               <li class="nav-item"><a class="nav-link" href="{{ path('fos_user_security_login') }}">Login</a></li>
+                            {% endif %}   
+                         
+                      </ul>
+                    </div>  
+                </nav>
+            </div>
+</div>
+<div class="container">
+  {% block body %}
+
+    {% endblock %}
+
+</div>
+  
+        {% block javascripts %}{% endblock %}
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{{asset('js/main.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css" />
+
+ <script src="{{asset('js/main2.js')}}"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.js"></script>
+
+
+    </body>
+</html>

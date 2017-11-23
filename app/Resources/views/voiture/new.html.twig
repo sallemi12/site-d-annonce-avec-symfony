@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="ajout_title text-center">Créer Votre Annonce</h1>
+
+    {{ form_start(form, { 'attr': {'class': 'ajout_annonce col-sm-6 col-sm-offset-3 '} }) }}
+        {{ form_widget(form) }}
+
+        <button type="submit" class="btn btn-lg  btn-primary ajouter">Ajouter</button>
+    {{ form_end(form) }}
+
+
+
+
+{% endblock %}

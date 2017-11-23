@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Voiture</h1>
+    <hr>
+       <div class="post  col-xs-10 col-xs-offset-1">
+                        <div class="post-image ">
+                            <div class=""><a href="{{ path('voiture_show', { 'id': voiture.id }) }}"></div>
+                            <div class="post-category">
+                                
+                                <p class="blog_date">{% if voiture.updateAt %}{{ voiture.updateAt|date('Y-m-d H:i:s') }}{% endif %}</p></a>
+                            </div>
+                             <a class="fancybox "  href="{{ asset('uploads/'~voiture.path) }}"  title="Lorem ipsum dolor sit amet"><img alt="sample image" class="img-responsive" src="{{ asset('uploads/'~voiture.path) }}"></a>
+
+                          </div>  
+                            <div class="description">
+
+                                <li class=" marque "> {{ voiture.marque  }} {{ voiture.modele}}</li>  
+                                <ul class="desc">
+
+                                  <li  class="desc prix"> Dt{{ voiture.prix }}</li>
+                                  <li  class="desc age"> Année  {% if voiture.agevehicule %}{{ voiture.agevehicule|date("m/Y") }}{% endif %}</li>
+
+                                  <li  class="desc kilometrage">{{ voiture.kilometrage }} KM</li>   
+                                  <li  class="desc region"> {{ voiture.region}}</li> 
+
+                                </ul>
+                                <ul class="desc">
+                                  <li  class="desc age"> {{voiture.carburant}}</li>
+
+                                  <li  class="desc prix"> {{ voiture.transmission }}</li>
+                                </ul>
+
+                        
+                                <ul class="desc">
+
+                                   <li  class="desc prix"> {{ voiture.description }}</li>
+                                </ul>
+                                <hr>
+                                 <h6>Contacter l'annonceur :</h6>
+                                 <ul class="desc">
+
+                                  <span class="glyphicon glyphicon-phone-alt"> </span> <li  class="desc prix">  {{  voiture.telephone }}</li>
+                                  <span class="glyphicon glyphicon-envelope"></span><li  class="desc age"> {{voiture.email}}</li>
+
+                                 
+                                </ul>
+                                </div> 
+                           
+                            <hr>
+                            
+                        </div>
+                    </div>
+    <ul>
+         <li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        {% endif %}
+        </li>
+    </ul>
+
+
+</div>
+
+{% endblock %}

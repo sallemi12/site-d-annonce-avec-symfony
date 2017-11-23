@@ -1,0 +1,24 @@
+admin_carburant_index:
+    path:     /
+    defaults: { _controller: "VoitureBundle:Carburant:index" }
+    methods:  GET
+
+admin_carburant_show:
+    path:     /{id}/show
+    defaults: { _controller: "VoitureBundle:Carburant:show" }
+    methods:  GET
+
+admin_carburant_new:
+    path:     /new
+    defaults: { _controller: "VoitureBundle:Carburant:new" }
+    methods:  [GET, POST]
+
+admin_carburant_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VoitureBundle:Carburant:edit" }
+    methods:  [GET, POST]
+
+admin_carburant_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VoitureBundle:Carburant:delete" }
+    methods:  DELETE

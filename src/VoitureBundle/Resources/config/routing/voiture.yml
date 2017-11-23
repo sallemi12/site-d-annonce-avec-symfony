@@ -1,0 +1,39 @@
+voiture_index:
+    path:     /
+    defaults: { _controller: "VoitureBundle:Voiture:index" }
+    methods:  GET
+voiture_show:
+    path:     /{id}/show
+    defaults: { _controller: "VoitureBundle:Voiture:show" }
+    methods:  GET
+voiture_new:
+    path:     /new
+    defaults: { _controller: "VoitureBundle:Voiture:new" }
+    methods:  [GET, POST]
+voiture_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VoitureBundle:Voiture:edit" }
+    methods:  [GET, POST]
+voiture_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VoitureBundle:Voiture:delete" }
+    methods:  DELETE
+get_modele_voiture:
+    path:    /getModele/{marque_id}
+    defaults: { _controller: "VoitureBundle:Voiture:Modele" }
+get_modele_voiture_recherche:
+    path:    /getModele_rechreche/{marque_id}
+    defaults: { _controller: "VoitureBundle:Voiture:Modelerecherche" }   
+    methods:  [GET, POST]
+voiture_rechercheform:
+    path:     /recherche
+    defaults: { _controller: "VoitureBundle:Voiture:recherche" }    
+voiture_recherche:
+    path:     /recherchetraitement
+    defaults: { _controller: "VoitureBundle:Voiture:rechercheTraitement" }        
+user_annonce:
+    path:     /user_annonce
+    defaults: { _controller: "VoitureBundle:Voiture:TrouverAnnonce" } 
+contact_annonceur:
+    path:     /contact_annonceur
+    defaults: { _controller: "VoitureBundle:Voiture:contact" }     
